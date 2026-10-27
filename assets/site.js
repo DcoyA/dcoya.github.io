@@ -199,3 +199,50 @@ document.querySelectorAll('form[data-calc="due"]').forEach(initDueCalc);
     io.observe(el);
   });
 })();
+
+// 문의하기: 메일 주소를 보여 주고 복사하거나 메일 앱을 연다.
+(function () {
+  const en = document.documentElement.lang === 'en';
+  // 단순 수집기에 덜 걸리도록 나눠서 조합한다.
+  const email = ['iamborghini5757', 'gmail.com'].join('@');
+  const t = en
+    ? { title: 'Contact us', body: 'Questions, feedback or partnership ideas are all welcome. We usually reply within a few days.', copy: 'Copy', copied: 'Copied', mail: 'Open mail app', close: 'Close', by: 'Launch Lab · Wonthly' }
+    : { title: '문의하기', body: '앱 사용 문의, 의견, 제휴 제안 모두 환영해요. 보통 며칠 안에 답장드려요.', copy: '복사', copied: '복사됨', mail: '메일 앱 열기', close: '닫기', by: 'Launch Lab · Wonthly' };
+
+  let dialog;
+  function open(e) {
+    if (e) e.preventDefault();
+    if (!dialog) {
+      dialog = document.createElement('dialog');
+      dialog.className = 'contact';
+      dialog.innerHTML =
+        '<img src="/assets/icon-192.png" alt="" width="60" height="60">' +
+        '<h2>' + t.title + '</h2><p>' + t.body + '</p>' +
+        '<div class="mail"><span></span><button type="button" class="btn btn-dark btn-sm" data-copy>' + t.copy + '</button></div>' +
+        '<div class="row"><a class="btn btn-coral btn-sm" data-mailto>' + t.mail + '</a>' +
+        '<form method="dialog"><button class="btn btn-ghost btn-sm" style="width:100%">' + t.close + '</button></form></div>' +
+        '<small>' + t.by + '</small>';
+      dialog.querySelector('.mail span').textContent = email;
+      dialog.querySelector('[data-mailto]').href = 'mailto:' + email + '?subject=' + encodeURIComponent('[Wonthly] ');
+      const copy = dialog.querySelector('[data-copy]');
+      copy.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+        } catch (_) {
+          const r = document.createRange();
+          r.selectNodeContents(dialog.querySelector('.mail span'));
+          const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+          document.execCommand('copy');
+        }
+        copy.textContent = t.copied;
+        copy.classList.add('copied');
+        setTimeout(() => { copy.textContent = t.copy; copy.classList.remove('copied'); }, 1800);
+      });
+      dialog.addEventListener('click', (ev) => { if (ev.target === dialog) dialog.close(); });
+      document.body.appendChild(dialog);
+    }
+    dialog.showModal ? dialog.showModal() : (location.href = 'mailto:' + email);
+  }
+  document.querySelectorAll('[data-contact]').forEach((el) => el.addEventListener('click', open));
+  if (location.hash === '#contact') open();
+})();

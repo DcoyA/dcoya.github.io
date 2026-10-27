@@ -309,3 +309,25 @@ dialog .btn { width: 100%; justify-content: center; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* 푸터 */
+footer.site-footer { border-top: 1px solid var(--border); margin-top: 40px; padding: 48px 0 40px; background: var(--surface); color: var(--ink-2); font-size: 14.5px; }
+footer.site-footer > .wrap:first-child { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; }
+.foot-brand p { margin: 12px 0 16px; line-height: 1.6; }
+.foot-col { display: flex; flex-direction: column; gap: 8px; }
+.foot-col strong { color: var(--ink); font-size: 14px; margin-bottom: 4px; }
+.foot-col a { color: var(--ink-2); text-decoration: none; }
+.foot-col a:hover { color: var(--coral-ink); }
+footer.site-footer .foot-bottom { display: flex; justify-content: space-between; gap: 12px; margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 13px; }
+footer.site-footer .foot-bottom a { color: var(--ink-2); }
+@media (max-width: 760px) { footer.site-footer > .wrap:first-child { grid-template-columns: 1fr 1fr; } .foot-brand { grid-column: 1 / -1; } }
+
+/* 문의 모달 */
+dialog.contact { max-width: 380px; }
+.contact .mail { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 6px 6px 6px 14px; margin: 0 0 12px; text-align: left; }
+.contact .mail span { flex: 1; font-weight: 700; font-size: 15px; overflow-wrap: anywhere; }
+.contact .mail .btn { width: auto; flex: none; }
+.contact .btn.copied { background: var(--mint); color: #fff; }
+.contact .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.contact small { display: block; margin-top: 14px; color: var(--ink-2); font-size: 12.5px; }
+.motion dialog[open] { animation: pop .35s cubic-bezier(.3, 1.4, .5, 1); }

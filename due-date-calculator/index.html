@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>출산 예정일 계산기 · 임신 주수 계산 (시험관 이식일 포함) | Wonthly</title>
+  <meta name="description" content="마지막 생리 시작일 또는 시험관 이식일(3일·5일 배아)로 출산 예정일과 오늘 기준 임신 주수, 임신 초기·후기 시작일을 계산해요. 무료 출산 예정일 계산기.">
+  <meta name="keywords" content="출산 예정일 계산기, 임신 주수 계산기, 임신 주수 계산, 출산 예정일 계산법, 시험관 출산 예정일, 이식일 출산 예정일, 5일 배아 예정일, 3일 배아 예정일, 임신 몇 주, 네겔레 법칙">
+  <link rel="canonical" href="https://dcoya.github.io/due-date-calculator/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wonthly">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="출산 예정일·임신 주수 계산기">
+  <meta property="og:description" content="마지막 생리 시작일이나 시험관 이식일로 출산 예정일과 임신 주수를 계산해요.">
+  <meta property="og:url" content="https://dcoya.github.io/due-date-calculator/">
+  <meta property="og:image" content="https://dcoya.github.io/assets/og-ko.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "출산 예정일·임신 주수 계산기",
+        "url": "https://dcoya.github.io/due-date-calculator/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "inLanguage": "ko-KR",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Wonthly", "item": "https://dcoya.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "출산 예정일 계산기", "item": "https://dcoya.github.io/due-date-calculator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "출산 예정일은 어떻게 계산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "마지막 생리 시작일에 280일(40주)을 더해 계산해요. 주기가 28일보다 길거나 짧으면 그 차이만큼 더하거나 빼요." } },
+          { "@type": "Question", "name": "시험관 시술은 출산 예정일을 어떻게 계산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "이식일에 266일을 더한 뒤 배아 일수를 빼요. 5일 배아라면 이식일 + 261일, 3일 배아라면 이식일 + 263일이에요." } },
+          { "@type": "Question", "name": "임신 주수는 언제부터 세나요?", "acceptedAnswer": { "@type": "Answer", "text": "임신 주수는 수정일이 아니라 마지막 생리 시작일부터 셉니다. 그래서 수정 무렵이 이미 임신 2주 무렵이에요." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/icon-192.png" alt="" width="30" height="30">Wonthly</a>
+    <nav aria-label="주요 메뉴">
+      <a href="/#features">기능</a>
+      <a href="/period-calculator/">생리 계산기</a>
+      <a href="/due-date-calculator/">출산 예정일 계산기</a>
+    </nav>
+    <a class="btn btn-dark btn-sm" href="#" data-store="auto">앱 받기</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="crumbs"><a href="/">Wonthly</a> › 출산 예정일 계산기</p>
+  <section style="padding-top:24px">
+    <h1 class="sec-title" style="font-size:clamp(28px,4.4vw,42px)">출산 예정일 · 임신 주수 계산기</h1>
+    <p class="sec-lead">마지막 생리 시작일이나 시험관 이식일을 넣으면 출산 예정일과 오늘 기준 임신 주수를 계산해요.</p>
+    <div class="calc">
+      <form data-calc="due">
+        <label>계산 방법
+          <select name="method">
+            <option value="lmp">마지막 생리 시작일로</option>
+            <option value="ivf">시험관 이식일로</option>
+          </select>
+        </label>
+        <label><span data-date-label>마지막 생리 시작일</span><input type="date" name="date" required></label>
+        <label data-cycle>평균 생리 주기(일)<input type="number" name="cycle" value="28" min="20" max="45" inputmode="numeric"></label>
+        <label data-embryo hidden>배아
+          <select name="embryo">
+            <option value="5">5일 배아(배반포)</option>
+            <option value="3">3일 배아</option>
+          </select>
+        </label>
+        <button class="btn btn-coral" type="submit">계산하기</button>
+      </form>
+      <div class="result" aria-live="polite"></div>
+      <p class="note">참고용 계산이에요. 실제 예정일은 초음파 검사 결과에 따라 병원에서 조정될 수 있어요.</p>
+    </div>
+  </section>
+
+  <div class="article">
+    <h2>출산 예정일 계산법</h2>
+    <p>가장 널리 쓰는 방법은 <strong>마지막 생리 시작일 + 280일(40주)</strong>이에요. 생리 주기가 28일이라고 가정한 계산이라, 주기가 32일이면 4일을 더 더하고 26일이면 2일을 빼서 맞춰요.</p>
+
+    <h2>시험관(IVF) 출산 예정일 계산법</h2>
+    <p>시험관 시술은 이식한 날이 정확히 알려져 있어 더 정확하게 계산할 수 있어요. <strong>이식일 + 266일 − 배아 일수</strong>로 계산하며, 5일 배아(배반포)는 이식일 + 261일, 3일 배아는 이식일 + 263일이에요.</p>
+
+    <h2>임신 주수 세는 법</h2>
+    <p>임신 주수는 수정한 날이 아니라 마지막 생리 시작일부터 세요. 그래서 수정 무렵이 이미 임신 2주 무렵이고, 생리 예정일이 지나 임신을 확인하는 때는 보통 4~5주예요. 임신 초기는 13주 6일까지, 임신 후기는 28주부터로 나눠요.</p>
+
+    <h2>임신 중에도, 임신 준비 중에도 Wonthly</h2>
+    <p>Wonthly 앱에서 ‘임신 중’을 고르면 출산 예정일과 오늘의 임신 주수를 보여 주고, 임신 중 출혈이 기록되면 병원 상담을 안내해요. 시험관 시술 중이라면 이식일과 피검사일을 넣어 남은 날을 보고, 약·주사마다 시각별 알림을 받을 수 있어요. 기록은 모두 기기 안에 암호화돼요.</p>
+    <div class="stores" style="margin-top:18px">
+      <a class="btn btn-dark" href="#" data-store="ios">App Store</a>
+      <a class="btn btn-ghost" href="#" data-store="android">Google Play</a>
+    </div>
+
+    <h2>함께 보면 좋은 계산기</h2>
+    <p><a href="/period-calculator/">생리 예정일·배란일·가임기 계산기</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Wonthly</span>
+    <span class="spacer"></span>
+    <a href="/">Wonthly 홈</a>
+    <a href="/period-calculator/">생리 예정일 계산기</a>
+    <a href="https://dcoya.github.io/wonthly-site/privacy.html">개인정보처리방침</a>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

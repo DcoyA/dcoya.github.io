@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>생리 예정일 계산기 · 배란일·가임기 계산 | Wonthly</title>
+  <meta name="description" content="마지막 생리 시작일과 생리 주기를 넣으면 다음 생리 예정일, 배란일, 가임기, 생리 끝나는 날을 바로 계산해 드려요. 무료 생리 주기 계산기.">
+  <meta name="keywords" content="생리 예정일 계산기, 생리 주기 계산기, 배란일 계산기, 가임기 계산기, 생리 날짜 계산, 다음 생리 언제, 배란일 언제, 생리 주기 계산법, 가임기 계산법">
+  <link rel="canonical" href="https://dcoya.github.io/period-calculator/">
+  <link rel="alternate" hreflang="ko" href="https://dcoya.github.io/period-calculator/">
+  <link rel="alternate" hreflang="en" href="https://dcoya.github.io/en/#calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Wonthly">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:title" content="생리 예정일·배란일·가임기 계산기">
+  <meta property="og:description" content="마지막 생리 시작일만 넣으면 다음 생리 예정일과 배란일, 가임기를 계산해요.">
+  <meta property="og:url" content="https://dcoya.github.io/period-calculator/">
+  <meta property="og:image" content="https://dcoya.github.io/assets/og-ko.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "생리 예정일·배란일 계산기",
+        "url": "https://dcoya.github.io/period-calculator/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "All",
+        "inLanguage": "ko-KR",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Wonthly", "item": "https://dcoya.github.io/" },
+          { "@type": "ListItem", "position": 2, "name": "생리 예정일 계산기", "item": "https://dcoya.github.io/period-calculator/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "생리 주기는 어떻게 세나요?", "acceptedAnswer": { "@type": "Answer", "text": "생리가 시작한 날부터 다음 생리가 시작하기 전날까지를 한 주기로 셉니다. 생리가 끝난 날이 아니라 시작한 날을 기준으로 해요." } },
+          { "@type": "Question", "name": "배란일은 어떻게 계산하나요?", "acceptedAnswer": { "@type": "Answer", "text": "배란은 보통 다음 생리 시작 약 14일 전에 일어난다고 보고 계산해요. 주기가 28일이면 생리 시작 후 14일째 무렵이에요. 실제 배란일은 사람과 달마다 달라질 수 있어요." } },
+          { "@type": "Question", "name": "가임기는 언제인가요?", "acceptedAnswer": { "@type": "Answer", "text": "정자는 몸속에서 며칠 살 수 있어 배란 5일 전부터 배란 다음 날까지를 가임기로 표시해요. 계산은 참고용이며 피임 방법으로 쓰면 안 돼요." } },
+          { "@type": "Question", "name": "생리 주기가 불규칙하면 어떻게 하나요?", "acceptedAnswer": { "@type": "Answer", "text": "주기가 매번 크게 달라지면 계산 결과도 정확하지 않아요. 몇 달 기록해 평균과 변동 폭을 보고, 주기가 21일보다 짧거나 35일보다 길게 반복되면 산부인과 상담을 권해요." } }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/icon-192.png" alt="" width="30" height="30">Wonthly</a>
+    <nav aria-label="주요 메뉴">
+      <a href="/#features">기능</a>
+      <a href="/period-calculator/">생리 계산기</a>
+      <a href="/due-date-calculator/">출산 예정일 계산기</a>
+    </nav>
+    <a class="btn btn-dark btn-sm" href="#" data-store="auto">앱 받기</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <p class="crumbs"><a href="/">Wonthly</a> › 생리 예정일 계산기</p>
+  <section style="padding-top:24px">
+    <h1 class="sec-title" style="font-size:clamp(28px,4.4vw,42px)">생리 예정일 · 배란일 · 가임기 계산기</h1>
+    <p class="sec-lead">마지막 생리 시작일과 평균 생리 주기만 넣으면 다음 생리 예정일, 생리 끝나는 날, 배란 예정일, 가임기를 바로 알려 드려요.</p>
+    <div class="calc">
+      <form data-calc="period">
+        <label>마지막 생리 시작일<input type="date" name="last" required></label>
+        <label>평균 생리 주기(일)<input type="number" name="cycle" value="28" min="20" max="60" inputmode="numeric"></label>
+        <label>생리 기간(일)<input type="number" name="len" value="5" min="2" max="10" inputmode="numeric"></label>
+        <button class="btn btn-coral" type="submit">계산하기</button>
+      </form>
+      <div class="result" aria-live="polite"></div>
+      <p class="note">일반적인 계산식에 따른 참고용 결과예요. 피임이나 진단 목적으로 쓰지 마세요.</p>
+    </div>
+  </section>
+
+  <div class="article">
+    <h2>생리 주기 계산법</h2>
+    <p>생리 주기는 생리가 <strong>시작한 날</strong>부터 다음 생리가 시작하기 전날까지예요. 예를 들어 10월 1일에 시작하고 다음 생리가 10월 29일에 시작했다면 주기는 28일이에요. 많은 사람의 주기는 21일에서 35일 사이이고, 달마다 며칠씩 달라지는 것은 흔한 일이에요.</p>
+
+    <h2>배란일과 가임기 계산법</h2>
+    <p>배란은 보통 다음 생리 시작 약 14일 전에 일어난다고 보고 계산해요. 그래서 주기가 28일이면 생리 시작 후 14일째, 32일이면 18일째 무렵이 배란 예정일이 됩니다. 정자는 몸속에서 며칠 살 수 있어서 배란 5일 전부터 배란 다음 날까지를 가임기로 봐요.</p>
+    <p>실제 배란일은 스트레스, 수면, 체중 변화, 질환에 따라 달라질 수 있어 계산 결과는 참고용이에요. 임신을 피하려는 목적이라면 계산이 아니라 피임법을 쓰세요.</p>
+
+    <h2>주기가 불규칙할 때</h2>
+    <p>주기가 매번 크게 달라지면 하나의 평균으로 맞히기 어려워요. 몇 달 기록해 평균과 변동 폭을 함께 보는 것이 좋아요. 주기가 21일보다 짧거나 35일보다 긴 일이 반복되거나, 3개월 넘게 생리가 없거나, 생리 기간이 7일을 넘게 이어지면 산부인과 상담을 권해요.</p>
+
+    <h2>기록할수록 정확해지는 Wonthly</h2>
+    <p>Wonthly 앱은 내 생리 기록으로 평균 주기와 기간을 계속 다시 계산해 생리 예정일과 배란일을 맞춰 가요. 생리통·PMS 증상, 피임약과 영양제 복용, 매일의 루틴까지 함께 기록하고, 모든 기록은 기기 안에 암호화돼요. 광고도 결제도 없어요.</p>
+    <div class="stores" style="margin-top:18px">
+      <a class="btn btn-dark" href="#" data-store="ios">App Store</a>
+      <a class="btn btn-ghost" href="#" data-store="android">Google Play</a>
+    </div>
+
+    <h2>함께 보면 좋은 계산기</h2>
+    <p><a href="/due-date-calculator/">출산 예정일·임신 주수 계산기</a> — 마지막 생리 시작일이나 시험관 이식일로 출산 예정일을 계산해요.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Wonthly</span>
+    <span class="spacer"></span>
+    <a href="/">Wonthly 홈</a>
+    <a href="/due-date-calculator/">출산 예정일 계산기</a>
+    <a href="https://dcoya.github.io/wonthly-site/privacy.html">개인정보처리방침</a>
+  </div>
+</footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>

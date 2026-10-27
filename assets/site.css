@@ -206,3 +206,106 @@ dialog img { width: 60px; height: 60px; border-radius: 16px; margin: 0 auto 12px
 dialog h2 { margin: 0 0 6px; font-size: 20px; }
 dialog p { margin: 0 0 20px; color: var(--ink-2); font-size: 15px; }
 dialog .btn { width: 100%; justify-content: center; }
+
+/* ───────── 움직임 ─────────
+   html.motion 은 JS 가 켜고, '동작 줄이기' 설정이면 켜지 않는다.
+   JS 가 없어도 모든 내용은 그대로 보인다(검색엔진용). */
+
+.progress { position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 20; transform-origin: 0 50%; transform: scaleX(var(--p, 0)); background: linear-gradient(90deg, var(--coral), #ffb51f, var(--mint)); }
+.top { transition: box-shadow .3s ease, background .3s ease; }
+.top.scrolled { box-shadow: 0 8px 30px -18px rgba(30, 21, 48, .35); }
+
+/* 히어로 배경의 흐르는 빛 */
+.hero { position: relative; overflow: clip; isolation: isolate; }
+.glow { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.glow i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .6; }
+.glow i:nth-child(1) { width: 420px; height: 420px; background: var(--coral-soft); right: 6%; top: 4%; }
+.glow i:nth-child(2) { width: 340px; height: 340px; background: var(--mint-soft); right: 30%; top: 45%; }
+.glow i:nth-child(3) { width: 300px; height: 300px; background: var(--violet-soft); left: -4%; top: 12%; }
+.motion .glow i:nth-child(1) { animation: drift1 16s ease-in-out infinite alternate; }
+.motion .glow i:nth-child(2) { animation: drift2 19s ease-in-out infinite alternate; }
+.motion .glow i:nth-child(3) { animation: drift3 22s ease-in-out infinite alternate; }
+@keyframes drift1 { to { translate: -120px 80px; scale: 1.15; } }
+@keyframes drift2 { to { translate: 140px -60px; scale: .9; } }
+@keyframes drift3 { to { translate: 90px 70px; scale: 1.2; } }
+
+/* 히어로 글자가 차례로 떠오른다 */
+.motion .hero .wrap > div:first-child > * { animation: rise .9s cubic-bezier(.2, .7, .2, 1) both; }
+.motion .hero .wrap > div:first-child > :nth-child(2) { animation-delay: .08s; }
+.motion .hero .wrap > div:first-child > :nth-child(3) { animation-delay: .18s; }
+.motion .hero .wrap > div:first-child > :nth-child(4) { animation-delay: .28s; }
+.motion .hero .wrap > div:first-child > :nth-child(5) { animation-delay: .38s; }
+@keyframes rise { from { opacity: 0; translate: 0 28px; filter: blur(6px); } to { opacity: 1; translate: 0 0; filter: blur(0); } }
+
+/* 강조 글자에 빛이 지나간다 */
+.motion .hero h1 em {
+  background: linear-gradient(100deg, var(--coral) 0%, var(--coral) 40%, #ffb51f 50%, var(--coral) 60%, var(--coral) 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shine 4.5s ease-in-out 1.2s infinite;
+}
+@keyframes shine { from { background-position: 100% 0; } 60%, to { background-position: 0 0; } }
+
+/* 폰은 둥둥 떠 있고, 마우스를 따라 살짝 움직인다 */
+.phones img { transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.phones img:first-child { transform: none; rotate: -5deg; }
+.phones img:last-child { transform: none; rotate: 4deg; }
+.motion .phones img:first-child { animation: enterL 1.1s cubic-bezier(.2, .7, .2, 1) .25s both, float 6s ease-in-out 1.4s infinite; transform: translate3d(calc(var(--mx, 0) * -14px), calc(var(--my, 0) * -10px), 0); }
+.motion .phones img:last-child { animation: enterR 1.1s cubic-bezier(.2, .7, .2, 1) .1s both, float 6s ease-in-out 1.2s infinite reverse; transform: translate3d(calc(var(--mx, 0) * 20px), calc(var(--my, 0) * 14px), 0); }
+@keyframes enterL { from { opacity: 0; translate: -40px 80px; rotate: -14deg; } }
+@keyframes enterR { from { opacity: 0; translate: 40px 90px; rotate: 12deg; } }
+@keyframes float { 50% { translate: 0 -14px; } }
+
+/* 흐르는 키워드 띠 */
+.marquee { overflow: hidden; padding: 14px 0; border-block: 1px solid var(--border); background: var(--surface); -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee .track { display: flex; gap: 10px; width: max-content; }
+.motion .marquee .track { animation: slide 60s linear infinite; }
+.marquee:hover .track { animation-play-state: paused; }
+.marquee span { white-space: nowrap; font-size: 14.5px; font-weight: 600; padding: 6px 14px; border-radius: 999px; }
+.marquee span:nth-child(4n+1) { background: var(--coral-soft); color: var(--coral-ink); }
+.marquee span:nth-child(4n+2) { background: var(--mint-soft); color: var(--mint-ink); }
+.marquee span:nth-child(4n+3) { background: var(--amber-soft); color: var(--amber-ink); }
+.marquee span:nth-child(4n) { background: var(--violet-soft); color: var(--violet); }
+@keyframes slide { to { transform: translateX(calc(-50% - 5px)); } }
+
+/* 스크롤하면 하나씩 샤라락 */
+.motion .reveal { opacity: 0; translate: 0 34px; filter: blur(4px); transition: opacity .8s ease, translate .9s cubic-bezier(.2, .7, .2, 1), filter .8s ease, transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease, border-color .35s ease; transition-delay: calc(var(--i, 0) * 80ms); }
+.motion .reveal.in { opacity: 1; translate: 0 0; filter: blur(0); }
+
+/* 카드에 손이 가면 살짝 떠오른다 */
+.card { transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease, border-color .35s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 22px 40px -24px rgba(30, 21, 48, .35); border-color: color-mix(in srgb, var(--coral) 30%, var(--border)); }
+.card:hover .ico { animation: wiggle .6s ease; }
+@keyframes wiggle { 30% { rotate: -10deg; scale: 1.12; } 60% { rotate: 6deg; } }
+
+/* 루틴 띠: 들어오면 체크가 하나씩 찍힌다 */
+.band { position: relative; overflow: hidden; isolation: isolate; }
+.band::before { content: ""; position: absolute; z-index: -1; width: 520px; height: 520px; right: -160px; top: -200px; border-radius: 50%; background: radial-gradient(circle, rgba(255, 90, 78, .35), transparent 65%); }
+.motion .band::before { animation: drift1 14s ease-in-out infinite alternate; }
+.band h3 { display: flex; align-items: center; gap: 10px; }
+.band h3::before { content: "✓"; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; font-size: 13px; font-weight: 800; color: #fff; background: var(--mint); flex: none; }
+.motion .band .card h3::before { scale: 0; transition: scale .5s cubic-bezier(.3, 1.6, .5, 1); transition-delay: calc(.4s + var(--i, 0) * 200ms); }
+.motion .band .card.in h3::before { scale: 1; }
+
+/* 계산 결과가 톡톡 튀어나온다 */
+.result div { animation: pop .5s cubic-bezier(.3, 1.4, .5, 1) both; }
+.result div:nth-child(2) { animation-delay: .05s; }
+.result div:nth-child(3) { animation-delay: .1s; }
+.result div:nth-child(4) { animation-delay: .15s; }
+.result div:nth-child(5) { animation-delay: .2s; }
+.result div:nth-child(6) { animation-delay: .25s; }
+@keyframes pop { from { opacity: 0; scale: .9; translate: 0 10px; } }
+
+/* 앱 버튼 위로 빛이 스친다 */
+.btn-dark, .btn-coral { position: relative; overflow: hidden; }
+.motion .btn-dark::after, .motion .btn-coral::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .28) 50%, transparent 70%); translate: -120% 0; animation: sweep 5s ease-in-out 2s infinite; }
+@keyframes sweep { 25%, to { translate: 120% 0; } }
+.motion .cta img.in { animation: bob 3s ease-in-out 1s infinite; }
+@keyframes bob { 50% { translate: 0 -8px; rotate: -4deg; } }
+
+/* FAQ 열릴 때 부드럽게 */
+.faq details[open] p { animation: rise .45s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

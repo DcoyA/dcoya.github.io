@@ -140,3 +140,62 @@ function initDueCalc(form) {
 
 document.querySelectorAll('form[data-calc="period"]').forEach(initPeriodCalc);
 document.querySelectorAll('form[data-calc="due"]').forEach(initDueCalc);
+
+// 움직임: 동작 줄이기 설정이 아니면 켠다.
+(function () {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const root = document.documentElement;
+  root.classList.add('motion');
+
+  // 위쪽 진행 막대와 헤더 그림자
+  const bar = document.createElement('div');
+  bar.className = 'progress';
+  document.body.prepend(bar);
+  const top = document.querySelector('.top');
+  function onScroll() {
+    const max = root.scrollHeight - innerHeight;
+    bar.style.setProperty('--p', max > 0 ? (scrollY / max).toFixed(4) : 0);
+    if (top) top.classList.toggle('scrolled', scrollY > 8);
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // 히어로 배경 빛
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    const glow = document.createElement('div');
+    glow.className = 'glow';
+    glow.setAttribute('aria-hidden', 'true');
+    glow.innerHTML = '<i></i><i></i><i></i>';
+    hero.prepend(glow);
+  }
+
+  // 폰이 마우스를 따라 살짝 움직인다
+  const phones = document.querySelector('.phones');
+  if (phones && matchMedia('(pointer: fine)').matches) {
+    addEventListener('pointermove', (e) => {
+      phones.style.setProperty('--mx', (e.clientX / innerWidth - 0.5).toFixed(3));
+      phones.style.setProperty('--my', (e.clientY / innerHeight - 0.5).toFixed(3));
+    }, { passive: true });
+  }
+
+  // 스크롤해서 보일 때 하나씩 나타난다. 같은 줄의 카드는 순서대로 조금씩 늦게.
+  const group = '.grid > *, .who > *, .faq details';
+  const targets = document.querySelectorAll(
+    'section:not(.hero) .sec-title, section:not(.hero) .sec-lead, ' + group +
+    ', .calc, .cta img, .cta .stores, .article > h2, .article > p, .crumbs'
+  );
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  targets.forEach((el) => {
+    if (el.matches(group)) {
+      const i = [...el.parentElement.children].indexOf(el);
+      el.style.setProperty('--i', i % 8);
+    }
+    el.classList.add('reveal');
+    io.observe(el);
+  });
+})();

@@ -1,8 +1,10 @@
-// 스토어 주소가 나오면 여기만 채운다. 비어 있으면 "준비 중" 안내를 띄운다.
-const STORE_LINKS = {
-  ios: '',
-  android: '',
-};
+// 스토어 주소. 비어 있으면 "준비 중" 안내를 띄운다.
+// 영어 페이지는 나라 없는 주소를 써서 방문자의 나라 스토어로 보낸다.
+// 구글 플레이가 공개되면 android 에 아래 주소를 넣는다.
+//   https://play.google.com/store/apps/details?id=com.wonthly.wonthly
+const STORE_LINKS = document.documentElement.lang === 'en'
+  ? { ios: 'https://apps.apple.com/app/wonthly/id6825163107', android: '' }
+  : { ios: 'https://apps.apple.com/kr/app/wonthly/id6825163107', android: '' };
 
 (function () {
   const en = document.documentElement.lang === 'en';
@@ -30,9 +32,11 @@ const STORE_LINKS = {
       // 기기에 맞는 스토어로 보낸다.
       const android = /android/i.test(navigator.userAgent);
       const pick = android ? STORE_LINKS.android : STORE_LINKS.ios;
-      if (pick) { el.href = pick; return; }
+      if (pick) { el.href = pick; el.target = '_blank'; el.rel = 'noopener'; return; }
     } else if (STORE_LINKS[el.dataset.store]) {
       el.href = url;
+      el.target = '_blank';
+      el.rel = 'noopener';
       return;
     }
     el.addEventListener('click', (e) => { e.preventDefault(); soon(); });
